@@ -1,8 +1,8 @@
 {
-  "main.css": "static/css/main.e2ea647c.css",
-  "main.css.map": "static/css/main.e2ea647c.css.map",
-  "main.js": "static/js/main.a3dcf762.js",
-  "main.js.map": "static/js/main.a3dcf762.js.map",
+  "main.css": "static/css/main.369d951e.css",
+  "main.css.map": "static/css/main.369d951e.css.map",
+  "main.js": "static/js/main.3bc68eb6.js",
+  "main.js.map": "static/js/main.3bc68eb6.js.map",
   "static\\media\\coming-soon.jpg": "static/media/coming-soon.25b23604.jpg",
   "static\\media\\hackerrank.png": "static/media/hackerrank.324f8f46.png",
   "static\\media\\konva-graphics.png": "static/media/konva-graphics.58921c96.png",
@@ -12,5 +12,6 @@
   "static\\media\\rocks-hero.jpg": "static/media/rocks-hero.a7cfb3e9.jpg",
   "static\\media\\rocks-tall.jpg": "static/media/rocks-tall.e5497584.jpg",
   "static\\media\\rocks-wide.jpg": "static/media/rocks-wide.ec5b8df6.jpg",
+  "static\\media\\sudoku.jpg": "static/media/sudoku.ec7468d5.jpg",
   "static\\media\\worm.png": "static/media/worm.f388a247.png"
 }
