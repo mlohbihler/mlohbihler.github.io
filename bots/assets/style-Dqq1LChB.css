@@ -1,0 +1,363 @@
+:root {
+  font-family: 'century gothic', Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  --button-blue: #08f;
+  --button-blue-hover: #6bf;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+#app {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+}
+
+#codeEditor {
+  width: 30vw;
+  height: 100vh;
+  color: #001111;
+  background-color: #ddd;
+  overflow: auto;
+  resize: horizontal;
+
+  > div {
+    height: 100%;
+  }
+}
+
+#controls {
+  background-color: #232424;
+  display: flex;
+  flex-direction: column;
+  font-size: 12px;
+  gap: 10px;
+  padding: 10px;
+  width: 250px;
+  overflow-y: auto;
+
+  span {
+    font-size: 14px;
+    max-width: 250px;
+    white-space: nowrap;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+#challengeHelp {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+#challengeName {
+  font-size: 24px;
+}
+
+#debugProps {
+  display: flex;
+  flex-direction: column;
+  max-width: 250px;
+  min-width: 250px;
+}
+#mousePositions {
+  display: flex;
+  flex-direction: column;
+  max-width: 235px;
+  min-width: 235px;
+}
+#mousePositionsContainer {
+  display: flex;
+  flex-direction: row;
+}
+#mouseIcon {
+  padding: 12px 10px 0 0;
+
+  svg {
+    height: 20px;
+    color: #ccc;
+    cursor: inherit;
+  }
+}
+
+#canvasContainer {
+  background-color: #001111;
+  flex-grow: 1;
+  height: 100vh;
+  overflow: hidden; /* keeps a scrollbar from appearing due to canvas resize */
+  outline: none;
+  position: relative;
+
+  #canvasVeil {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    opacity: 0;
+    pointer-events: none;
+    color: var(--button-blue);
+    font-size: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 400;
+
+    .challengeNav {
+      display: flex;
+      justify-content: space-between;
+      font-size: 36px;
+
+      div {
+        border-bottom: 1px solid var(--button-blue);
+        pointer-events: visibleFill;
+        transition: 0.25s;
+
+        &:hover {
+          cursor: pointer;
+          color: var(--button-blue-hover);
+          transition: 0.25s;
+          border-bottom-color: var(--button-blue-hover);
+        }
+      }
+    }
+    svg {
+      height: 26px;
+      color: inherit;
+      transition: inherit;
+    }
+  }
+
+  #canvasStartButton {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+
+    svg {
+      height: 128px;
+      background-color: #23242488;
+      border: 1px solid #08f8;
+      padding: 10px 30px;
+      border-radius: 20px;
+      pointer-events: visibleFill;
+
+      &:hover {
+        border: 1px solid var(--button-blue-hover);
+      }
+    }
+  }
+}
+#codeError {
+  position: absolute;
+  left: 20px;
+  bottom: 30px;
+  background-color: #fff4;
+  padding: 10px;
+  border: 1px solid red;
+  border-radius: 5px;
+  min-width: 300px;
+  color: #333d;
+  opacity: 0;
+  transition: 0.4s;
+
+  &:hover {
+    color: #333;
+    background-color: #fff;
+    transition: 0.25s;
+  }
+}
+#codeErrorContent {
+  font-family: monospace;
+  white-space: pre;
+}
+
+.fa {
+  height: 50px;
+  color: var(--button-blue);
+  transition: 0.25s;
+
+  &:hover {
+    color: var(--button-blue-hover);
+    transition: 0.25s;
+    cursor: pointer;
+  }
+
+  &.disabled {
+    color: #444;
+    transition: 0.25s;
+    cursor: auto;
+  }
+
+  &.play {
+    height: 43.5px;
+    position: relative;
+    top: 3px;
+  }
+  &.info {
+    padding: 0 3px;
+    position: relative;
+    top: -1px;
+  }
+  &.grip-vertical {
+    cursor: ew-resize;
+  }
+
+  &.close {
+    position: absolute;
+    right: -13px;
+    top: -13px;
+    cursor: pointer;
+    transition: 0.7s;
+    height: 25px;
+
+    .fa-primary {
+      color: #fff;
+    }
+
+    &:hover .fa-secondary {
+      transition: 0.25s;
+      color: var(--button-blue-hover);
+    }
+  }
+}
+
+#buttons,
+#help {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+#help {
+  justify-content: left;
+  padding-top: 3px;
+  gap: 10px;
+
+  .fa {
+    height: 18px;
+  }
+}
+
+.modalVeil {
+  /* Box model allows the padding to be considered as part of the 100% and 100vh */
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: #8888;
+  padding: 60px;
+  opacity: 0;
+}
+.modal {
+  /* Box model allows the padding to be considered as part of the 100% and 100vh */
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+
+  position: relative;
+  padding: 20px 0;
+  background-color: #eee;
+  border-radius: 10px;
+  height: 100%;
+}
+.modalScroller {
+  padding: 0 20px;
+  height: 100%;
+  overflow-y: auto;
+  scrollbar-color: #333 #eee;
+}
+#infoModalContent {
+  color: #333;
+  font-family: Helvetica;
+
+  dt {
+    font-weight: 600;
+  }
+  code {
+    background-color: #ccc;
+    padding: 2px 5px;
+    border-radius: 5px;
+
+    &.snippet {
+      display: block;
+      background-color: #333;
+      color: #eee;
+      padding: 10px;
+      width: fit-content;
+      border-radius: 5px;
+    }
+  }
+  table {
+    border-collapse: collapse;
+    background-color: #ddd;
+    border-radius: 5px;
+    margin: 5px 10px;
+  }
+  thead {
+    font-weight: 600;
+  }
+  td {
+    border: 1px solid #333;
+    padding: 2px 5px;
+    vertical-align: top;
+  }
+  p.highlight {
+    border: 1px solid #333;
+    background-color: #ff8;
+    padding: 10px 20px;
+    width: fit-content;
+  }
+}
+#infoLogo {
+  text-align: center;
+}
+
+#configModal {
+  width: fit-content;
+  background-color: #333;
+  height: auto;
+
+  h1 {
+    margin: 0 0 10px;
+    font-size: 24px;
+  }
+}
+
+footer {
+  font-size: smaller;
+  font-style: italic;
+}
+
+.configInput {
+  padding-bottom: 10px;
+}
+
+select {
+  padding: 5px 10px 5px 3px;
+}
