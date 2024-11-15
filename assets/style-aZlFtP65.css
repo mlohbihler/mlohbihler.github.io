@@ -303,13 +303,15 @@ body {
 }
 
 #sudoku-message-container {
-  margin-top: 40px;
+  margin: 40px;
   text-align: center;
 }
 
 #sudoku-message {
   width: auto;
   padding: 20px;
-  border: 1px solid #4080ff;
+  border: 1px solid #80b0ff;
+  color: #4080ff;
+  font-weight: 600;
   border-radius: 10px;
 }
